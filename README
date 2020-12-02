@@ -1,0 +1,6 @@
+Create a folder called 'db' 
+
+Create the following file names:
+  - users.sql
+  - attackhistory.sql
+  - logs.log
