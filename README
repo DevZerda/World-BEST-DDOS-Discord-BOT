@@ -1,6 +1,56 @@
+
+Clipzy BOT V1.00
+
+-------------------------------------------------------------------------------
+Requirements      |
+-------------------
+
+npm install discord.js --save
+npm install node-fetch --save
+npm install node-bash-title --save
+
+
+------------------------------------------------------------------------------
+Setup            |
+------------------
 Create a folder called 'db' 
 
 Create the following file names:
   - users.sql
   - attackhistory.sql
   - logs.log
+
+
+------------------------------------------------------------------------------
+Be sure edit the following codes!     |
+---------------------------------------
+
+/************
+ * BOT INFO *
+************/
+var bot_prefix = "./";
+var bot_title = "b00t3rn3t";
+var bot_version = "v1.00";
+var bot_inv = "https://discord.com/api/oauth2/authorize?client_id=775893565163307059&permissions=8&scope=bot";
+var bot_server = "https://discord.gg/cknCDYxHdG";
+
+/***************
+ * MY INFO     *
+ **************/
+
+ var myDISCORD = "";
+ var myDISCORD_ID = "";
+ var mySERVER = "";
+ var mySERVER_ID = "";
+ var myctmInv = "";
+ var myINVITE = "";
+/*---------------------------------String-------------------------------------*/
+var GEOAPI = "";
+var PORTSCANAPI = "";
+
+//BOOT STRINGS
+//var BOOTERAPI = "";
+var BOOTERAPI2 = "";
+var BOOTERAPI3 = "";
+// var STOPAPI = "";
+// var STOPALLAPI = "";
