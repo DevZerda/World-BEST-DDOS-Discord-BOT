@@ -28,11 +28,11 @@ Be sure edit the following codes!     |
 /************
  * BOT INFO *
 ************/
-var bot_prefix = "./";
-var bot_title = "b00t3rn3t";
-var bot_version = "v1.00";
-var bot_inv = "https://discord.com/api/oauth2/authorize?client_id=775893565163307059&permissions=8&scope=bot";
-var bot_server = "https://discord.gg/cknCDYxHdG";
+var bot_prefix = "";
+var bot_title = "";
+var bot_version = "";
+var bot_inv = "";
+var bot_server = "";
 
 /***************
  * MY INFO     *
