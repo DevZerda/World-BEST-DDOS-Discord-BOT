@@ -13,6 +13,7 @@ npm install node-bash-title --save
 ------------------------------------------------------------------------------
 Setup            |
 ------------------
+
 Create a folder called 'db' 
 
 Create the following file names:
