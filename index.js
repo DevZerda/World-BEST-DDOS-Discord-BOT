@@ -6,6 +6,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 const setTitle = require('node-bash-title');
 const { userInfo } = require("os");
 const { exec } = require('child_process');
+const config = require("./config.json");
 
 /*██████████████████████████████████████████████
 
