@@ -116,7 +116,7 @@ discordBot.on("message", function (message) {
     if(message.author.bot) return;
     if (messagereceived.startsWith(bot_prefix)) {
         // if (USER_ID === myDISCORD_ID) { //WHITELIST A USER TO USE THE BOT (DISABLED FROM EVERYONE ELSE)
-            if (config.blacklist.include(DISCORD_SERVER))
+            if (config.blacklist.include(DISCORD_SERVER)) // Maybe do you wanna use the server ID instead of name?
             { 
                 logger("command");
                 sendmsg("__**Error**__","This server (" + DISCORD_SERVER + ") has been blacklisted from being used! Try using the bot in another server or the main server!") ;
