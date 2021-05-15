@@ -32,22 +32,7 @@ const accountToken = "Nzc1ODkzNTY1MTYzMzA3MDU5.X6s9MQ.WOHnY3LO2cSXKsVHvk3es0N2vo
 
 discordBot.on("ready", () => {
     console.clear();
-    console.log(CYAN + "            ████████████████████████████████►" + PURPLE + "Clipzy Discord Bot" + CYAN + "◄███████████████████████████████████");
-    console.log("            ██                                                                                   ██");
-    console.log("            ██              Clipzy Bot Now Started! █ Created & Developed By: Clipzy             ██");
-    console.log("            ██                                                                                   ██");
-    console.log("            ██                          Type ./info in server to start!                          ██");
-    console.log("            ██                                                                                   ██");
-    console.log("            ███████████████████████████████████████████████████████████████████████████████████████");
-    console.log("            ██                     USER INFO █ SERVER INFO █ PERMISSION CHECK                    ██");
-    console.log("            ███████████████████████████████████████████████████████████████████████████████████████");
-    console.log("            ██ " + YELLOW + "REGULAR MESSAGES" + CYAN + "                                                 " + RED + "COMMAND MESSAGES" + CYAN + " ██");
-    console.log("            ██                                 Logging Formart                                   ██");
-    console.log("            ██  USER █ USERID                                                                    ██");
-    console.log("            ██  SERVER █ SERVER_ID                                                               ██");
-    console.log("            ██  ADMIN █ MANAGE MSG █ MANAGE ROLE                                                 ██");
-    console.log("            ██  CMD/MSG                                                                          ██");
-    console.log("            ███████████████████████████████████████████████████████████████████████████████████████");
+    console.log(`${CYAN}            ██████████████████████████████► ${PURPLE} Clipzy Discord Bot ${CYAN} ◄█████████████████████████████████\n            ██                                                                                   ██\n            ██              Clipzy Bot Now Started! █ Created & Developed By: Clipzy             ██\n            ██                                                                                   ██\n            ██                          Type ./info in server to start!                          ██\n            ██                                                                                   ██\n            ███████████████████████████████████████████████████████████████████████████████████████\n            ██                     USER INFO █ SERVER INFO █ PERMISSION CHECK                    ██\n            ███████████████████████████████████████████████████████████████████████████████████████\n            ██ ${YELLOW} REGULAR MESSAGES  ${CYAN}                                             ${RED}COMMAND MESSAGES ${CYAN} ██\n            ██                                 Logging Format                                    ██\n            ██  USER █ USERID                                                                    ██\n            ██  SERVER █ SERVER_ID                                                               ██\n            ██  ADMIN █ MANAGE MSG █ MANAGE ROLE                                                 ██\n            ██  CMD/MSG                                                                          ██\n            ███████████████████████████████████████████████████████████████████████████████████████`);
     discordBot.user.setPresence({ status: 'dnd', game: { name: bot_prefix + 'info to get started!!' } });
 });
 
